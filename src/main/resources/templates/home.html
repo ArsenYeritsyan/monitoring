@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Server Monitoring Dashboard</title>
+<!--    <meta http-equiv="refresh" content="10"> &lt;!&ndash; Refresh the page every 10 seconds &ndash;&gt;-->
+    <script>
+        // Refresh the page every 10 seconds
+        setTimeout(function () {
+            location.reload();
+        }, 10000);
+    </script>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <style>
+        .server-info {
+            background-color: #fdddb6;
+            color: #313d23;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .server-info.red {
+            background-color: #b20505;
+        }
+
+        .server-info.green {
+            background-color: #358035;
+        }
+
+        .server-info h2 {
+            margin: 0;
+        }
+
+        .server-chart {
+        }
+    </style>
+</head>
+<body>
+<h1>Server Monitoring Dashboard</h1>
+<div th:each="serverInfo : ${serverInfoList}"
+     th:classappend="${serverInfo.cpuLoad > 90 || serverInfo.memoryFree < 200 || serverInfo.cpuLoad == 0.0 ? 'red' : 'green'}">
+    <div class="server-info">
+        <h2 th:text="${serverInfo.serverName}"></h2>
+        <p>IP Address: <span th:text="${serverInfo.ipAddress}"></span></p>
+        <p>CPU Load: <span th:text="${serverInfo.cpuLoad}"></span>%</p>
+        <p>Memory Used: <span th:text="${serverInfo.memoryUsed}"></span> bytes</p>
+        <p>Memory Free: <span th:text="${serverInfo.memoryFree}"></span> bytes</p>
+    </div>
+    <div class="server-chart">
+    </div>
+</div>
+<!--<meta http-equiv="refresh" content="20">-->
+</body>
+</html>
