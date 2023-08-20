@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 @ConfigurationProperties(prefix = "serverinfo")
 public class ServerInfoConfig {
@@ -20,6 +21,7 @@ public class ServerInfoConfig {
         private String ipAddress;
         private String username;
         private String password;
+        private String oS; // Add the OS property
 
         public String getServerName() {
             return serverName;
@@ -53,9 +55,16 @@ public class ServerInfoConfig {
             this.password = password;
         }
 
+        public String getOS() {
+            return oS;
+        }
+
+        public void setOS(String oS) {
+            this.oS = oS;
+        }
+
         public ServerInfo toServerInfo() {
-            return new ServerInfo(serverName, ipAddress, username, password);
+            return new ServerInfo(serverName, ipAddress, username, password, oS);
         }
     }
 }
-

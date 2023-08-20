@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
 <head>
-    <title>Server Monitoring Dashboard</title>
-<!--    <meta http-equiv="refresh" content="10"> &lt;!&ndash; Refresh the page every 10 seconds &ndash;&gt;-->
-    <script>
-        // Refresh the page every 10 seconds
-        setTimeout(function () {
-            location.reload();
-        }, 10000);
-    </script>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <title> Server Monitoring Dashboard</title>
+    <meta content="10" http-equiv="refresh"> <!-- Refresh the page every 10 seconds -->
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
     <style>
         .server-info {
             background-color: #fdddb6;
@@ -36,18 +30,88 @@
 </head>
 <body>
 <h1>Server Monitoring Dashboard</h1>
-<div th:each="serverInfo : ${serverInfoList}"
-     th:classappend="${serverInfo.cpuLoad > 90 || serverInfo.memoryFree < 200 || serverInfo.cpuLoad == 0.0 ? 'red' : 'green'}">
+<div th:classappend="${serverInfo.cpuLoad gt 90 or serverInfo.memoryFree lt 200} ? 'red' : 'green'"
+     th:each="serverInfo : ${serverInfoList}">
     <div class="server-info">
-        <h2 th:text="${serverInfo.serverName}"></h2>
-        <p>IP Address: <span th:text="${serverInfo.ipAddress}"></span></p>
-        <p>CPU Load: <span th:text="${serverInfo.cpuLoad}"></span>%</p>
-        <p>Memory Used: <span th:text="${serverInfo.memoryUsed}"></span> bytes</p>
-        <p>Memory Free: <span th:text="${serverInfo.memoryFree}"></span> bytes</p>
+        <h2 th:text="${serverInfo.serverName}">Server Name</h2>
+        <p>IP Address: <span th:text="${serverInfo.ipAddress}">Unavailable</span></p>
+        <p>CPU Load: <span th:text="${serverInfo.cpuLoad}">Unavailable</span>%</p>
+        <p>Memory Used: <span th:text="${serverInfo.memoryUsed}">Unavailable</span> bytes</p>
+        <p>Memory Free: <span th:text="${serverInfo.memoryFree}">Unavailable</span> bytes</p>
     </div>
     <div class="server-chart">
+        <!-- Add server chart here if needed -->
     </div>
 </div>
-<!--<meta http-equiv="refresh" content="20">-->
+</body>
+<body>
+<h1>Server Monitoring Dashboard</h1>
+<div th:classappend="${serverInfo.cpuLoad != null and serverInfo.cpuLoad > 90 or
+                           serverInfo.memoryFree != null and serverInfo.memoryFree < 200 ? 'red' : ''}"
+     th:each="serverInfo : ${serverInfoList}">
+    <h2>Server Name: <span th:text="${serverInfo.serverName}"></span></h2>
+    <p>IP Address: <span th:text="${serverInfo.ipAddress}"></span></p>
+    <p>CPU Load: <span th:text="${serverInfo.cpuLoad != null ? serverInfo.cpuLoad + '%' : 'undefined'}"></span></p>
+    <p>Memory Free: <span
+            th:text="${serverInfo.memoryFree != null ? serverInfo.memoryFree + ' bytes' : 'undefined'}"></span></p>
+    <p>Memory Used: <span
+            th:text="${serverInfo.memoryUsed != null ? serverInfo.memoryUsed + ' bytes' : 'undefined'}"></span></p>
+    <!-- Add more details as needed -->
+</div>
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Server Monitoring Dashboard</title>-->
+<!--    <meta http-equiv="refresh" content="10"> &lt;!&ndash; Refresh the page every 10 seconds &ndash;&gt;-->
+<!--&lt;!&ndash;    <script>&ndash;&gt;-->
+<!--&lt;!&ndash;        // Refresh the page every 10 seconds&ndash;&gt;-->
+<!--&lt;!&ndash;        setTimeout(function () {&ndash;&gt;-->
+<!--&lt;!&ndash;            location.reload();&ndash;&gt;-->
+<!--&lt;!&ndash;        }, 5000);&ndash;&gt;-->
+<!--&lt;!&ndash;    </script>&ndash;&gt;-->
+<!--    <link rel="stylesheet" th:href="@{/styles.css}" />-->
+<!--    <style>-->
+<!--        .server-info {-->
+<!--            background-color: #fdddb6;-->
+<!--            color: #313d23;-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .server-info.red {-->
+<!--            background-color: #b20505;-->
+<!--        }-->
+
+<!--        .server-info.green {-->
+<!--            background-color: #358035;-->
+<!--        }-->
+
+<!--        .server-info h2 {-->
+<!--            margin: 0;-->
+<!--        }-->
+
+<!--        .server-chart {-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>   Server Monitoring Dashboard</h1>-->
+<!--<div th:each="serverInfo : ${serverInfoList}"-->
+<!--     th:classappend="${serverInfo.cpuLoad > 90 || serverInfo.memoryFree < 200 ? 'red' : 'green'}">-->
+<!--    <div class="server-info">-->
+<!--        <h2 th:text="${serverInfo.serverName}"></h2>-->
+<!--        <p>IP Address: <span th:text="${serverInfo.ipAddress}"></span></p>-->
+<!--        <p>CPU Load: <span th:text="${serverInfo.cpuLoad}"></span>%</p>-->
+<!--        <p>Memory Used: <span th:text="${serverInfo.memoryUsed}"></span> bytes</p>-->
+<!--        <p>Memory Free: <span th:text="${serverInfo.memoryFree}"></span> bytes</p>-->
+<!--    </div>-->
+<!--    <div class="server-chart">-->
+<!--    </div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<meta http-equiv="refresh" content="10">&ndash;&gt;-->
+<!--</body>-->
+<!--</html>-->

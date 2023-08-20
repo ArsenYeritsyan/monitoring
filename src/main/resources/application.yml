@@ -1,10 +1,22 @@
 serverinfo:
   servers:
-    - serverName: Windows Server
+    - serverName: web
       ipAddress: 192.168.1.1
       username: admin
       password: admin
-    - serverName: Unix Server
+      oS: Windows
+    - serverName: Local Unix Server
       ipAddress: 127.0.0.1
       username: arsen
       password: 1298
+      oS: Unix
+    - serverName: app
+      ipAddress: 192.168.1.5
+      username: admin
+      password: admin
+      oS: Windows
+    - serverName: db
+      ipAddress: 127.0.0.100
+      username: arsen
+      password: 1298
+      oS: Unix

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>System Information</title>
+</head>
+<body>
+<h1>System Information</h1>
+<table>
+    <tr>
+        <th>Server Name</th>
+        <th>IP Address</th>
+        <th>OS</th>
+        <th>CPU Load (%)</th>
+        <th>Free Physical Memory</th>
+        <th>Total Used Memory</th>
+    </tr>
+    <tr th:each="systemInfo : ${systemInfoList}">
+        <td th:text="${systemInfo.serverName}"></td>
+        <td th:text="${systemInfo.ipAddress}"></td>
+        <td th:text="${systemInfo.oS}"></td>
+        <td th:text="${systemInfo.cpuLoad}"></td>
+        <td th:text="${systemInfo.memoryUsed} ?: 'N/A'"></td>
+        <td th:text="${systemInfo.memoryFree} ?: 'N/A'"></td>
+    </tr>
+</table>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Server Monitoring Dashboard</title>-->
+<!--    <meta http-equiv="refresh" content="10">-->
+<!--    <link rel="stylesheet" th:href="@{/styles.css}" />-->
+<!--    <style>-->
+<!--        .server-info {-->
+<!--            background-color: #fdddb6;-->
+<!--            color: #313d23;-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .server-info.red {-->
+<!--            background-color: #b20505;-->
+<!--        }-->
+
+<!--        .server-info.green {-->
+<!--            background-color: #358035;-->
+<!--        }-->
+
+<!--        .server-info h2 {-->
+<!--            margin: 0;-->
+<!--        }-->
+
+<!--        .server-chart {-->
+<!--            /* Add your server chart styles here */-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Server Monitoring Dashboard</h1>-->
+<!--<div th:each="serverInfo : ${serverInfoList}"-->
+<!--     th:classappend="${serverInfo.cpuLoad gt 90 or serverInfo.memoryFree lt 200} ? 'red' : 'green'">-->
+<!--    <div class="server-info">-->
+<!--        <h2 th:text="${serverInfo.serverName}">Server Name</h2>-->
+<!--        <p>IP Address: <span th:text="${serverInfo.ipAddress}">Unavailable</span></p>-->
+<!--        <p>CPU Load: <span th:text="${serverInfo.cpuLoad}">Unavailable</span>%</p>-->
+<!--        <p>Memory Used: <span th:text="${serverInfo.memoryUsed}">Unavailable</span> bytes</p>-->
+<!--        <p>Memory Free: <span th:text="${serverInfo.memoryFree}">Unavailable</span> bytes</p>-->
+<!--    </div>-->
+<!--    <div class="server-chart">-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <th>Server Name</th>-->
+<!--                <th>IP Address</th>-->
+<!--                <th>Description</th>-->
+<!--                <th>OS</th>-->
+<!--                <th>CPU Load (%)</th>-->
+<!--                <th>Memory Used (KB)</th>-->
+<!--                <th>Memory Free (KB)</th>-->
+<!--            </tr>-->
+<!--            <tr th:each="server : ${servers}">-->
+<!--                th:classappend="${serverInfo.cpuLoad gt 90 or serverInfo.memoryFree lt 200} ? 'red' : 'green'">-->
+<!--                <td th:text="${server.serverName}"></td>-->
+<!--                <td th:text="${server.ipAddress}"></td>-->
+<!--                <td th:text="${server.username}"></td>-->
+<!--                <td th:text="${server.oS}"></td>-->
+<!--                <td th:text="${server.cpuLoad}"></td>-->
+<!--                <td th:text="${server.memoryUsed}"></td>-->
+<!--                <td th:text="${server.memoryFree}"></td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<h1>Server Information</h1>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Server Name</th>-->
+<!--        <th>IP Address</th>-->
+<!--        <th>Description</th>-->
+<!--        <th>OS</th>-->
+<!--        <th>CPU Load (%)</th>-->
+<!--        <th>Memory Used (KB)</th>-->
+<!--        <th>Memory Free (KB)</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="server : ${servers}">-->
+<!--        th:classappend="${serverInfo.cpuLoad gt 90 or serverInfo.memoryFree lt 200} ? 'red' : 'green'">-->
+<!--        <td th:text="${server.serverName}"></td>-->
+<!--        <td th:text="${server.ipAddress}"></td>-->
+<!--        <td th:text="${server.username}"></td>-->
+<!--        <td th:text="${server.oS}"></td>-->
+<!--        <td th:text="${server.cpuLoad}"></td>-->
+<!--        <td th:text="${server.memoryUsed}"></td>-->
+<!--        <td th:text="${server.memoryFree}"></td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Server Monitoring Dashboard</title>-->
+<!--    <meta http-equiv="refresh" content="10"> &lt;!&ndash; Refresh the page every 10 seconds &ndash;&gt;-->
+<!--    <link rel="stylesheet" th:href="@{/styles.css}" />-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Server Information</h1>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Server Name</th>-->
+<!--        <th>IP Address</th>-->
+<!--        <th>Description</th>-->
+<!--        <th>OS</th>-->
+<!--        <th>CPU Load (%)</th>-->
+<!--        <th>Memory Used (KB)</th>-->
+<!--        <th>Memory Free (KB)</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="server : ${servers}">-->
+<!--        <td th:text="${server.serverName}"></td>-->
+<!--        <td th:text="${server.ipAddress}"></td>-->
+<!--        <td th:text="${server.username}"></td>-->
+<!--        <td th:text="${server.oS}"></td>-->
+<!--        <td th:text="${server.cpuLoad}"></td>-->
+<!--        <td th:text="${server.memoryUsed}"></td>-->
+<!--        <td th:text="${server.memoryFree}"></td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>System Information</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<h1>System Information</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;<table>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>Server Name</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>IP Address</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>OS</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>CPU Load (%)</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>Free Physical Memory</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>Total Visible Memory</th>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tr th:each="systemInfo : ${systemInfoList}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${systemInfo.serverName}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${systemInfo.ipAddress}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${systemInfo.oS}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${systemInfo.cpuLoad}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${systemInfo.server.memoryFree} ?: 'N/A'"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${server.memoryUsed} ?: 'N/A'"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;</table>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
